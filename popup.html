@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 250px;
+      padding: 15px;
+      font-family: 'Malgun Gothic', sans-serif;
+      text-align: center;
+    }
+    
+    /* 마우스 우클릭 붙여넣기 상자 */
+    #paste-area {
+      border: 2px dashed #4285f4;
+      border-radius: 8px;
+      padding: 20px 10px;
+      margin-bottom: 10px;
+      color: #555;
+      background-color: #f8f9fa;
+      transition: background-color 0.2s;
+      outline: none; 
+      caret-color: transparent; /* 커서 숨김 */
+    }
+    #paste-area:hover {
+      background-color: #e8f0fe;
+    }
+    
+    /* 버튼 디자인 */
+    .action-btn {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    #scan-screen-btn { background-color: #4285f4; }
+    #scan-screen-btn:hover { background-color: #3367d6; }
+    #generate-btn { background-color: #0f9d58; }
+    #generate-btn:hover { background-color: #0b8043; }
+    
+    /* 결과 메시지 및 이미지 영역 */
+    #message {
+      font-weight: bold;
+      word-break: break-all;
+      font-size: 13px;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    #recognized-img-container {
+      margin-top: 10px;
+      display: none;
+    }
+    #recognized-img-container img {
+      max-width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* 기타 설정 */
+    .option-area {
+      font-size: 12px;
+      margin-bottom: 10px;
+      text-align: right;
+      color: #555;
+    }
+    .option-area label { cursor: pointer; }
+    .divider { margin: 20px 0; border: 0; border-top: 1px solid #ddd; }
+    
+    /* 생성된 QR 코드 영역 */
+    #qrcode-display {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      cursor: pointer; 
+    }
+    #qrcode-display:hover img {
+      outline: 3px solid #0f9d58;
+      border-radius: 4px;
+    }
+    #qrcode-instr {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #888;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h3 style="margin-top: 0; margin-bottom: 10px;">QR코드 리더기</h3>
+  
+  <div class="option-area">
+    <label>
+      <input type="checkbox" id="auto-open-checkbox" checked>
+      자동으로 새 탭 열기
+    </label>
+  </div>
+
+  <button id="scan-screen-btn" class="action-btn">현재 화면에서 QR 찾기</button>
+
+  <div id="paste-area" contenteditable="true">
+    이곳을 우클릭하고<br>
+    <b>'붙여넣기'</b>를 누르세요.
+  </div>
+
+  <div id="message"></div>
+  <div id="recognized-img-container">
+    <div style="font-size: 10px; color: #888; margin-bottom: 5px;">[인식된 이미지]</div>
+    <img id="recognized-img" src="" alt="인식된 QR">
+  </div>
+
+  <hr class="divider">
+
+  <h3 style="margin-top: 0; margin-bottom: 10px;">QR코드 생성기</h3>
+  <button id="generate-btn" class="action-btn">현재 사이트 QR 만들기</button>
+  <div id="qrcode-display"></div>
+  <div id="qrcode-instr">클릭: 크게 보기 / 우클릭: 복사</div>
+
+  <canvas id="canvas" hidden></canvas>
+
+  <script src="jsQR.js"></script>
+  <script src="qrcode.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

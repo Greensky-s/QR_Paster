@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "QR 코드 도우미",
+  "version": "1.2",
+  "description": "PC 화면의 QR 코드를 1초 만에 해독하고, 현재 접속 중인 사이트의 QR 코드를 생성합니다.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "QR 코드 도우미"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "icons": {
+    "128": "icon.png"
+  }
+}
